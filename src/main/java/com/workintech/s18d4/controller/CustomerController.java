@@ -1,15 +1,18 @@
 package com.workintech.s18d4.controller;
 
+
+import com.workintech.s18d4.dto.CustomerResponse;
 import com.workintech.s18d4.entity.Customer;
 import com.workintech.s18d4.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
-@RequestMapping("/customers")
+@RequestMapping("/customer")
 public class CustomerController {
     private CustomerService customerService;
 
@@ -19,29 +22,33 @@ public class CustomerController {
     }
 
     @GetMapping
-    public List<Customer> getAllCustomers(@RequestBody Customer customer){
-        return customerService.getAllCustomers();
+    public List<Customer> findAll() {
+        return customerService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Optional<Customer> getCustomerById(@PathVariable Long id){
-        return customerService.getCustomerById(id);
+    public ResponseEntity<Customer> find(@PathVariable Long id) {
+        Customer customer = customerService.find(id);
+        return ResponseEntity.ok(customer);
     }
 
     @PostMapping
-    public Customer createCustomer(@RequestBody Customer customer){
-        return customerService.createCustomer(customer);
+    public ResponseEntity<CustomerResponse> save(@RequestBody Customer customer) {
+        Customer savedCustomer = customerService.save(customer);
+        CustomerResponse response = new CustomerResponse(savedCustomer.getId(), savedCustomer.getEmail(), savedCustomer.getSalary());
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PutMapping("/{id}")
-    public Customer updateCustomer(@PathVariable Long id, @RequestBody Customer customer){
-       return customerService.updateCustomer(id, customer);
+    public ResponseEntity<Customer> update(@PathVariable Long id, @RequestBody Customer customer) {
+        customer.setId(id);
+        Customer updatedCustomer = customerService.save(customer);
+        return ResponseEntity.ok(updatedCustomer);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteCustomer(Long id){
-        customerService.deleteCustomer(id);
+    public ResponseEntity<Customer> delete(@PathVariable Long id) {
+        Customer deletedCustomer = customerService.delete(id);
+        return ResponseEntity.ok(deletedCustomer);
     }
-
-
 }

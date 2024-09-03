@@ -35,5 +35,6 @@ public class Address {
         private String description;
 
         @OneToMany(mappedBy = "address", cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.PERSIST, CascadeType.REFRESH})
-        private List<Customer> customers;
+        private Customer customer;
+
 }

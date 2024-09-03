@@ -42,7 +42,7 @@ public class AddressServiceImpl implements AddressService{
         address.setNo(address.getNo());
         address.setCity(address.getCity());
         address.setCountry(address.getCountry());
-        address.setCustomers(address.getCustomers());
+        address.setCustomer(address.getCustomer());
         address.setDescription(address.getDescription());
         return addressRepository.saveAddress(address);
     }

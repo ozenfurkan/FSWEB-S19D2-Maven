@@ -92,7 +92,7 @@ class MainTest {
         sampleAddressForAddressEntity = new Address();
         sampleAddressForAddressEntity.setId(1L);
         sampleAddressForAddressEntity.setStreet("Main Street");
-        sampleAddressForAddressEntity.setNo(100);
+        sampleAddressForAddressEntity.setNo("100");
         sampleAddressForAddressEntity.setCity("Sample City");
         sampleAddressForAddressEntity.setCountry("Sample Country");
         sampleAddressForAddressEntity.setDescription("Near the big landmark");
@@ -128,7 +128,7 @@ class MainTest {
 
         sampleAddressForAddressRepositoryTest = new Address();
         sampleAddressForAddressRepositoryTest.setStreet("Main Street");
-        sampleAddressForAddressRepositoryTest.setNo(42);
+        sampleAddressForAddressRepositoryTest.setNo("42");
         sampleAddressForAddressRepositoryTest.setCity("Sample City");
         sampleAddressForAddressRepositoryTest.setCountry("Sample Country");
         sampleAddressForAddressRepositoryTest.setDescription("Near the park");
@@ -136,7 +136,7 @@ class MainTest {
 
         Address address = new Address();
         address.setStreet("Main Street");
-        address.setNo(42);
+        address.setNo("42");
         address.setCity("Sample City");
         address.setCountry("Sample Country");
         entityManager.persist(address);
